@@ -1,6 +1,7 @@
 import express from "express";
 import config from "./config";
 import apiRoutes from "./routes/index";
+import errorHandler from "./middlewares/errorHandler";
 
 const app = express();
 
@@ -12,7 +13,8 @@ app.use(express.json());
 app.use('/api', apiRoutes);
 app.get('/', (req, res) => {
     res.send("hellow:");
-})
-// error handlers
+});
+//custom handlers
+app.use(errorHandler);
 
 app.listen(config.PORT, () => console.log(`The server is successfully running on PORT: ${config.PORT}`));
